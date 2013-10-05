@@ -8,13 +8,30 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
+/**
+ * ポップアップを一定時間後に非表示にするためのクラスです.
+ * @author Getaji
+ *
+ */
 public class NTTimer implements ActionListener {
+	/** ポップアップインデックス. */
     private int index;
+    
+    /** タイマー. */
     private Timer timer;
+    
+    /**
+     * ポップアップインデックスを登録.
+     * @param index ポップアップインデックス
+     */
     public NTTimer(int index) {
         this.index = index;
     }
 
+    /**
+     * Timerを登録.
+     * @param timer タイマー
+     */
     public void setTimer(Timer timer) {
         this.timer = timer;
     }
@@ -36,6 +53,7 @@ public class NTTimer implements ActionListener {
                 return;
         }
         } catch (IllegalComponentStateException e) {
+        	throw new NotifyTweetException("存在しないポップアップインデックス");
         } catch (NullPointerException e) {
         	// ヽ(╹◡╹)ノ
         }
