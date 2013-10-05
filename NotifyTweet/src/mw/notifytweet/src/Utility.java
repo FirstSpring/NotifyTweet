@@ -8,10 +8,22 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * 汎用的な処理をまとめたクラスです.
+ * @author Getaji
+ *
+ */
 public class Utility {
-	private static long time = 0;
+	
+	/** ぷらいべっつ. */
 	private Utility() { }
 	
+	/**
+	 * マウスポインタがコンポーネント内に入っているか判定します.
+	 * @param source コンポーネント
+	 * @param point ポインタ
+	 * @return 入っているか
+	 */
 	public static boolean isInBox(Component source, Point point) {
 		return 0 <= point.x
 				&& 0 <= point.y
@@ -48,13 +60,5 @@ public class Utility {
 			NotifyTweet.getInstance().setStatus(false, "[NotifyTweet]更新の取得に失敗しました");
 			return unknown;
 		}
-	}
-	
-	public static void startRunTime() {
-		time = System.currentTimeMillis();
-	}
-	
-	public static long stopRunTime() {
-		return System.currentTimeMillis() - time;
 	}
 }
