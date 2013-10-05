@@ -1,5 +1,4 @@
 #NotifyTweet
-===========
 
 ##概要
 NotifyTweetは、Java製TwitterクライアントJavatterのプラグインです。  
