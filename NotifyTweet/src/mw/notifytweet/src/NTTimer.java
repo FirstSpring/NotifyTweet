@@ -10,56 +10,65 @@ import javax.swing.Timer;
 
 /**
  * ポップアップを一定時間後に非表示にするためのクラスです.
+ * 
  * @author Getaji
- *
+ * 
  */
 public class NTTimer implements ActionListener {
 	/** ポップアップインデックス. */
-    private int index;
-    
-    /** タイマー. */
-    private Timer timer;
-    
-    /**
-     * ポップアップインデックスを登録.
-     * @param index ポップアップインデックス
-     */
-    public NTTimer(int index) {
-        this.index = index;
-    }
+	private int index;
 
-    /**
-     * Timerを登録.
-     * @param timer タイマー
-     */
-    public void setTimer(Timer timer) {
-        this.timer = timer;
-    }
+	/** タイマー. */
+	private Timer timer;
 
-    @Override
-    public void actionPerformed(ActionEvent ev) {
-        /* ダイアログがピン止めされてたら抜ける */
-        if (NotifyTweet.getInstance().getPopupManager().isPinDialog(index)) {return;}
+	/**
+	 * ポップアップインデックスを登録.
+	 * 
+	 * @param index
+	 *            ポップアップインデックス
+	 */
+	public NTTimer(int index) {
+		this.index = index;
+	}
 
-        /* ダイアログの中にマウスが入ってたら抜ける */
-        Point pointerM = MouseInfo.getPointerInfo().getLocation();
-        Point pointerD = null;
-        try {
-            pointerD = NotifyTweet.getInstance().getPopupManager().getPopups()[index].getLocationOnScreen();
-            if (pointerM.x > pointerD.x
-                    && pointerM.x < pointerD.x + EnumData.POPUP_WIDTH.getInt()
-                    && pointerM.y > pointerD.y
-                    && pointerM.y < pointerD.y + EnumData.POPUP_HEIGHT.getInt()) {
-                return;
-        }
-        } catch (IllegalComponentStateException e) {
-        	throw new NotifyTweetException("存在しないポップアップインデックス");
-        } catch (NullPointerException e) {
-        	// ヽ(╹◡╹)ノ
-        }
+	/**
+	 * Timerを登録.
+	 * 
+	 * @param timer
+	 *            タイマー
+	 */
+	public void setTimer(Timer timer) {
+		this.timer = timer;
+	}
 
-        NotifyTweet.getInstance().getPopupManager().setVisible(index, false, null);
-        timer.stop();
-    }
+	@Override
+	public void actionPerformed(ActionEvent ev) {
+		/* ダイアログがピン止めされてたら抜ける */
+		if (NotifyTweet.getInstance().getPopupManager().isPinDialog(index)) {
+			return;
+		}
+
+		/* ダイアログの中にマウスが入ってたら抜ける */
+		Point pointerM = MouseInfo.getPointerInfo().getLocation();
+		Point pointerD = null;
+		try {
+			pointerD = NotifyTweet.getInstance().getPopupManager().getPopups()[index]
+					.getLocationOnScreen();
+			if (pointerM.x > pointerD.x
+					&& pointerM.x < pointerD.x + EnumData.POPUP_WIDTH.getInt()
+					&& pointerM.y > pointerD.y
+					&& pointerM.y < pointerD.y + EnumData.POPUP_HEIGHT.getInt()) {
+				return;
+			}
+		} catch (IllegalComponentStateException e) {
+			throw new NotifyTweetException("存在しないポップアップインデックス");
+		} catch (NullPointerException e) {
+			// ヽ(╹◡╹)ノ
+		}
+
+		NotifyTweet.getInstance().getPopupManager()
+				.setVisible(index, false, null);
+		timer.stop();
+	}
 
 }
