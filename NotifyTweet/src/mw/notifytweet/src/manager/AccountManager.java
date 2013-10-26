@@ -17,7 +17,7 @@ public class AccountManager implements Serializable {
 
 	public static final String SECRET = "XsRMKLGEerg1uLPziq5VfPQgsxiOR6i1iZUCD8KxTI";
 
-	public static final String PATH = "./accounts.dat";
+	public static final String PATH = "./Accounts.dat";
 
 	private AccountManager() {
 	}
